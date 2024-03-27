@@ -1,0 +1,13 @@
+﻿Instance,Provider,Constract,Cost Per Hour,GPU,# GPU,GPU Memory
+g5.2xlarge,AWS,On Demand,1.212,a10g,1,24
+g5.2xlarge,AWS,1 Year,0.727,a10g,1,24
+g5.2xlarge,AWS,3 Year,0.485,a10g,1,24
+g5.12xlarge,AWS,On Demand,5.672,a10g,4,96
+g5.12xlarge,AWS,1 Year,3.403,a10g,4,96
+g5.12xlarge,AWS,3 Year,2.269,a10g,4,96
+g5.24xlarge,AWS,On Demand,8.144,a10g,4,96
+g5.24xlarge,AWS,1 Year,4.886,a10g,4,96
+g5.24xlarge,AWS,3 Year,3.258,a10g,4,96
+g5.48xlarge,AWS,On Demand,16.288,a10g,8,192
+g5.48xlarge,AWS,1 Year,9.773,a10g,8,192
+g5.48xlarge,AWS,3 Year,6.515,a10g,8,192
