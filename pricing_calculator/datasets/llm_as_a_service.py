@@ -28,6 +28,8 @@ class SAASModelInfo(BaseModel):
     region: Region = Field(alias="Region")
     max_tokens: int = Field(alias="Max Tokens")
     output_token_limit: OptionalInt = Field(alias="Max Output Tokens")
+    rate_limit_tokens: OptionalInt = Field(alias="Rate Limit Tokens")
+    rate_limit_throughput: OptionalInt = Field(alias="Rate Limit Throughput")
 
 
 def load():

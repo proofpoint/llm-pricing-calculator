@@ -44,16 +44,20 @@ def time_per_input_token(
     batch_size: int,
 ) -> float:
     profile_input_size = closest_input_size_in_the_profile(
-        io_profiles["input"], config.input_tokens
+        io_profiles["input_profile"], config.input_tokens
     )
     lower_batch_size = closest_batch_size(
-        io_profiles["input"][profile_input_size], batch_size, "lower"
+        io_profiles["input_profile"][profile_input_size], batch_size, "lower"
     )
     upper_batch_size = closest_batch_size(
-        io_profiles["input"][profile_input_size], batch_size, "upper"
+        io_profiles["input_profile"][profile_input_size], batch_size, "upper"
     )
-    lower_batched_time = io_profiles["input"][profile_input_size][lower_batch_size]
-    upper_batched_time = io_profiles["input"][profile_input_size][upper_batch_size]
+    lower_batched_time = io_profiles["input_profile"][profile_input_size][
+        lower_batch_size
+    ]
+    upper_batched_time = io_profiles["input_profile"][profile_input_size][
+        upper_batch_size
+    ]
     interpolated_time = (
         lower_batched_time + upper_batched_time / 2
     )  # Linear interpolation
@@ -64,7 +68,7 @@ def time_per_input_token(
 def batch_latency(
     io_profiles: Dict[str, pd.DataFrame], config: Config, batch_size: int
 ) -> float:
-    time_per_output_token = io_profiles["output"]["time-per-output-token"]
+    time_per_output_token = 1 / io_profiles["output_profile"]["throughput"]
 
     generation_time = time_per_output_token * config.output_tokens
     ingestion_time = (
@@ -80,9 +84,9 @@ def data_limited_batch_size(
     io_profiles: Dict[str, Union[pd.DataFrame, Dict[str, float]]], config: Config
 ) -> int:
     profile_input_size = closest_input_size_in_the_profile(
-        io_profiles["input"], config.input_tokens
+        io_profiles["input_profile"], config.input_tokens
     )
-    available_batch_sizes = io_profiles["input"][profile_input_size].dropna()
+    available_batch_sizes = io_profiles["input_profile"][profile_input_size].dropna()
     ideal_batch_size = max(available_batch_sizes.index)
 
     # Partial Differential Equation
@@ -125,10 +129,11 @@ def output_server_utilization(
     """The number of servers required to satisfy the output throughput load."""
     # Output Throughput Load / server capacity
     # Use the ideal batch size to calculate the maximum throughput capacity
-    batch_size = ideal_batch_size(io_profiles["input"], config.input_tokens)
+    batch_size = ideal_batch_size(io_profiles["input_profile"], config.input_tokens)
 
     output_throughput_load = config.requests_per_sec * config.output_tokens
-    server_output_capacity = (
-        1 / io_profiles["output"]["time-per-output-token"]
-    ) * batch_size
+    server_output_capacity = io_profiles["output_profile"]["throughput"] * batch_size
+    print(io_profiles["output_profile"]["throughput"])
+    print("load", output_throughput_load)
+    print("capacity", server_output_capacity)
     return output_throughput_load / server_output_capacity

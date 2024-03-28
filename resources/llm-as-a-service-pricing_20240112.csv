@@ -1,22 +1,22 @@
-﻿,Model,Provider,Producer,Model ID,Cost/1k Input Token,Cost/1k Output Token,Fine Tuneable?,Region,Max Tokens,Max Output Tokens
-2,gpt-4,OpenAI,OpenAI,,$0.0300000,$0.0600000,no,US,128000,4096
-7,bison-fine-tuned,GCP,Google,,$0.0020000,$0.0020000,yes,US,8192,1024
-6,bison,GCP,Google,,$0.0020000,$0.0020000,no,US,8192,1024
-18,llama-2-chat-70b,AWS Bedrock,Meta,meta.llama2-70b-chat-v1,$0.0019500,$0.0025600,no,US ,4096,
-17,llama-2-chat-13b,AWS Bedrock,Meta,meta.llama2-13b-chat-v1,$0.0007500,$0.0010000,no,US ,4096,
-16,command-light, AWS Bedrock,Cohere,cohere.command-light-text-v14,$0.0003000,$0.0006000,no,US ,4000,
-15,command,AWS Bedrock,Cohere,cohere.command-text-v14,$0.0015000,$0.0020000,no,US,4000,
-14,jurassic-2-ultra,AWS Bedrock,AI21,ai21.j2-ultra-v1,$0.0188000,$0.0188000,no,US,8191,
-13,juraasic-2-mid,AWS Bedrock,AI21,ai21.j2-mid-v1,$0.0125000,$0.0125000,no,US,8191,
-12,mistral-70b,Mistral,Mistral,,$0.0026900,$0.0080700,no,EU,8000,
-11,mistral-moe,Mistral,Mistral,,$0.0006500,$0.0019400,no,EU,8000,
-19,mistral-7b,AWS Bedrock,Mistral,mistral.mistral-7b-instruct-v0:2,$0.0001500,$0.000200,no,EU,32000,
-20,mistral-8x7b,AWS Bedrock,Mistral,mistral.mixtral-8x7b-instruct-v0:1,$0.0004500,$0.0007,no,EU,32000,
-9,titan-express,AWS Bedrock,Amazon,amazon.titan-text-express-v1,$0.0008000,$0.0016000 ,no,US,8000,
-8,titan-lite,AWS Bedrock,Amazon,amazon.titan-text-lite-v1,$0.0003000,$0.0004000 ,no,US,4000,
-5,gpt-3.5-finetuned,OpenAI,OpenAI,,$0.0030000,$0.0060000,yes,US,4096,
-4,gpt-3.5-turbo,OpenAI,OpenAI,,$0.0010000,$0.0020000,no,US,4096,
-3,gpt-4 turbo,OpenAI,OpenAI,,$0.0100000,$0.0300000,no,US,4096,
-1,claude-2,AWS Bedrock,Anthropic,anthropic.claude-v1,$0.0080000,$0.0240000,no,US,100000,
-21,claude-3,AWS Bedrock,Anthropic,anthropic.claude-3-sonnet-20240229-v1,$0.0030000,$0.0150000,no,US,200000,
-0,claude-instant,AWS Bedrock,Anthropic,anthropic.claude-instant-v1,$0.0016300,$0.0055100,no,US,100000,
+﻿,Model,Provider,Producer,Model ID,Cost/1k Input Token,Cost/1k Output Token,Fine Tuneable?,Region,Max Tokens,Max Output Tokens,Rate Limit Tokens,Rate Limit Throughput
+2,gpt-4,OpenAI,OpenAI,,$0.0300000,$0.0600000,no,US,128000,4096,,
+7,bison-fine-tuned,GCP,Google,,$0.0020000,$0.0020000,yes,US,8192,1024,,
+6,bison,GCP,Google,,$0.0020000,$0.0020000,no,US,8192,1024,,
+18,llama-2-chat-70b,AWS Bedrock,Meta,meta.llama2-70b-chat-v1,$0.0019500,$0.0025600,no,US ,4096,,,
+17,llama-2-chat-13b,AWS Bedrock,Meta,meta.llama2-13b-chat-v1,$0.0007500,$0.0010000,no,US ,4096,,,
+16,command-light, AWS Bedrock,Cohere,cohere.command-light-text-v14,$0.0003000,$0.0006000,no,US ,4000,,800,300000
+15,command,AWS Bedrock,Cohere,cohere.command-text-v14,$0.0015000,$0.0020000,no,US,4000,,400,300000
+14,jurassic-2-ultra,AWS Bedrock,AI21,ai21.j2-ultra-v1,$0.0188000,$0.0188000,no,US,8191,,100,200000
+13,juraasic-2-mid,AWS Bedrock,AI21,ai21.j2-mid-v1,$0.0125000,$0.0125000,no,US,8191,,400,300000
+12,mistral-70b,Mistral,Mistral,,$0.0026900,$0.0080700,no,EU,8000,,,
+11,mistral-moe,Mistral,Mistral,,$0.0006500,$0.0019400,no,EU,8000,,,
+19,mistral-7b,AWS Bedrock,Mistral,mistral.mistral-7b-instruct-v0:2,$0.0001500,$0.000200,no,EU,32000,,800,300000
+20,mistral-8x7b,AWS Bedrock,Mistral,mistral.mixtral-8x7b-instruct-v0:1,$0.0004500,$0.0007,no,EU,32000,,400,300000
+9,titan-express,AWS Bedrock,Amazon,amazon.titan-text-express-v1,$0.0008000,$0.0016000 ,no,US,8000,,400,300000
+8,titan-lite,AWS Bedrock,Amazon,amazon.titan-text-lite-v1,$0.0003000,$0.0004000 ,no,US,4000,,800,300000
+5,gpt-3.5-finetuned,OpenAI,OpenAI,,$0.0030000,$0.0060000,yes,US,4096,,,
+4,gpt-3.5-turbo,OpenAI,OpenAI,,$0.0010000,$0.0020000,no,US,4096,,,
+3,gpt-4 turbo,OpenAI,OpenAI,,$0.0100000,$0.0300000,no,US,4096,,,
+1,claude-2,AWS Bedrock,Anthropic,anthropic.claude-v1,$0.0080000,$0.0240000,no,US,100000,,100,200000
+21,claude-3,AWS Bedrock,Anthropic,anthropic.claude-3-sonnet-20240229-v1,$0.0030000,$0.0150000,no,US,200000,,100,200000
+0,claude-instant,AWS Bedrock,Anthropic,anthropic.claude-instant-v1,$0.0016300,$0.0055100,no,US,100000,,400,300000

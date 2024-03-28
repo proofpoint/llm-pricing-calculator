@@ -106,17 +106,23 @@ def estimate_costs(
 
     for model in models:
         model_profiles = model_profile_utils.load(model)
-        for instance_type, gpu_profiles in model_profiles.items():
-            print(f"Instance: {instance_type}")
-            batch_size = ideal_batch_size(gpu_profiles["input"], config.input_tokens)
-            real_batch_size = data_limited_batch_size(gpu_profiles, config)
+        for model_profile in model_profiles:
+            # for instance_type, gpu_profiles in model_profiles.items():
+            #     for platform_profile in gpu_profiles["output"]:
+            instance_name = model_profile["instance_name"]
+            platform_name = model_profile["platform"]
+            print(f"Instance: {platform_name} on {instance_name}")
+            batch_size = ideal_batch_size(
+                model_profile["input_profile"], config.input_tokens
+            )
+            real_batch_size = data_limited_batch_size(model_profile, config)
             print(f"Ideal batch size: {batch_size}")
             print(f"Data limited batch: {real_batch_size}")
-            latency = batch_latency(gpu_profiles, config, real_batch_size)
+            latency = batch_latency(model_profile, config, real_batch_size)
             # print model latency to 3 decimal places
             print(f"Model Latency: {latency:.3f}s")
-            input_utilization = input_server_utilization(gpu_profiles, config)
-            output_utilization = output_server_utilization(gpu_profiles, config)
+            input_utilization = input_server_utilization(model_profile, config)
+            output_utilization = output_server_utilization(model_profile, config)
             total_utilization = input_utilization + output_utilization
             print(f"Input Server Utilization: {input_utilization}")
             print(f"Output Server Utilization: {output_utilization}")
@@ -128,12 +134,12 @@ def estimate_costs(
             print(f"Servers Required: {servers_required}")
             print(f"Surge Capacity: {reserve_compute:.2f}% increase in traffic")
             pricing = self_hosted_price(
-                instance_type, gpu_profiles, config, model_hosting_costs
+                instance_name, model_profile, config, model_hosting_costs
             )
             columnar_pricing = [
                 {
                     "Model": model,
-                    "Instance": key.split("-")[0],
+                    "Instance": f"{platform_name} on {instance_name}",
                     "Contract": key.split("-")[1],
                     "Server Count": servers_required,
                     "Batch Size": real_batch_size,
@@ -391,9 +397,13 @@ with data_tab:
 
     st.write("### Model Profiles")
     for model in model_profile_utils.get_model_names():
-        for gpu_name, profile in model_profile_utils.load(model).items():
-            st.write(f"#### {model} - {gpu_name}")
-            st.dataframe(profile["input"])
+        for model_profile in model_profile_utils.load(model):
+            instance_name = model_profile["instance_name"]
+            st.write(f"#### {model} - {instance_name} on {model_profile['platform']}")
+            st.write(
+                f"**Token Generation Throughput:** {model_profile['output_profile']['throughput']} Token/sec"
+            )
+            st.dataframe(model_profile["input_profile"])
 
 with info_tab:
     st.write("### Limitations")
