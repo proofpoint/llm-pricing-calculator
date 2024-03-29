@@ -1,11 +1,10 @@
 [project]
-# dynamic = ["version"]
 name = "llm-pricing-calculator"
+version = "0.0.1"
 dependencies = ["streamlit>=1.32.2", "pyyaml>=6.0.1", "pydantic>=2.6.4"]
 requires-python = ">=3.10"
 license = { file = "LICENSE" }
 readme = { file = "README.md", content-type = "text/markdown" }
-version = "0.0.1"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
