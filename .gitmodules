@@ -1,0 +1,3 @@
+[submodule "llm-pricing-calculator"]
+	path = llm-pricing-calculator
+	url = https://github.com/proofpoint/llm-pricing-calculator
